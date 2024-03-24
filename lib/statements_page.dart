@@ -34,6 +34,7 @@ class _StatementsPageState extends State<StatementsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

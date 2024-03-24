@@ -60,6 +60,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
         appBar: AppBar(
           centerTitle: true,
           title: const Text("Recent Transactions"),

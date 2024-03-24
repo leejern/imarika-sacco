@@ -71,6 +71,7 @@ class _PinResetState extends State<PinReset> {
       ),
     );
     return Scaffold(
+      resizeToAvoidBottomInset:true,
         appBar: AppBar(
           title: const Text('Change Pin'),
         ),

@@ -6,6 +6,7 @@ class TransferCashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Center(

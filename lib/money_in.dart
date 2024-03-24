@@ -50,6 +50,7 @@ class _MoneyInState extends State<MoneyIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
         appBar: AppBar(
           centerTitle: true,
           title: const Text("Money in"),

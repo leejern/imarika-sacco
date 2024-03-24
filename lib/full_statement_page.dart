@@ -15,6 +15,7 @@ class _FullStatementPageState extends State<FullStatementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("All Transactions"),

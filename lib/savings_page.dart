@@ -52,7 +52,7 @@ class _SavingsPageState extends State<SavingsPage> {
     setState(() {
       accountbalance = accountdata['balance'];
       savingsbalance = savingsdata['balance'];
-      totalout = accountdata['total out'];
+      totalout = accountdata['total_out'];
       if (savingsbalance > 0) {
         hasSavings = true;
       }
@@ -142,6 +142,7 @@ class _SavingsPageState extends State<SavingsPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data != null) {
           return Scaffold(
+            resizeToAvoidBottomInset:true,
             appBar: AppBar(
               title: const Text('Savings'),
             ),

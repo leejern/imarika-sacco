@@ -90,6 +90,7 @@ class _LogInPageState extends State<LogInPage> {
       ),
     );
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       appBar: AppBar(
         title: const Text(
           'Login',

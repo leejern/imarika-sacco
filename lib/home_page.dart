@@ -19,10 +19,12 @@ class _HomePageState extends State<HomePage> {
   final _user = Hive.box("user");
   int currentPage = 0;
   LogDatabase dbuser = LogDatabase();
+  bool hasSavings = true;
 
   @override
   void initState() {
     getUser();
+    checkSavings();
     super.initState();
   }
 
@@ -33,8 +35,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
- 
-
   Stream<DocumentSnapshot> getAccountEntityStream() {
     return FirebaseFirestore.instance
         .collection("account_entitty")
@@ -42,24 +42,51 @@ class _HomePageState extends State<HomePage> {
         .snapshots();
   }
 
-  List<Widget> pages =  [
+  Future<void> checkSavings() async {
+    DocumentSnapshot savingssnapshot = await FirebaseFirestore.instance
+        .collection("savings_entity")
+        .doc(userNo)
+        .get();
+    var savingsdata = savingssnapshot.data() as Map<String, dynamic>;
+    if (savingsdata['balance'] == 0) {
+      setState(() {
+        hasSavings = false;
+      });
+    }
+  }
+
+  List<Widget> pages = [
     HomeDetails(),
-    AccessPermission(page:SavingsPage()),
-    AccessPermission(page:LoansPage()),
+    AccessPermission(page: const SavingsPage()),
+    AccessPermission(page: const LoansPage()),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.deepPurple,
         backgroundColor: const Color.fromARGB(255, 231, 230, 233),
         onTap: (value) {
-          setState(() {
-            currentPage = value;
-          });
+          if (value == 2 && !hasSavings) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const AlertDialog(
+                  icon: Icon(Icons.error),
+                  content: Text(
+                      "To access savings, you must have some amount into your savings account"),
+                );
+              },
+            );
+          } else {
+            setState(() {
+              currentPage = value;
+            });
+          }
         },
         currentIndex: currentPage,
         iconSize: 30,

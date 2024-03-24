@@ -17,6 +17,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
   final phoneNumbercontroller = TextEditingController();
   final amountcontroller = TextEditingController();
   late int balance;
+  late int totalout;
   String transactiondate = "";
   int? test = 1;
 
@@ -88,24 +89,24 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
     var data = snapshot.data() as Map<String, dynamic>;
     setState(() {
       balance = data['balance'];
+      totalout = data['total_out'];
     });
   }
 
   Future<void> _transact() async {
     if (balance >= int.parse(amountcontroller.text)) {
       balance = balance - int.parse(amountcontroller.text);
+      int out = totalout + int.parse(amountcontroller.text);
       await FirebaseFirestore.instance
           .collection("account_entitty")
           .doc(userNo)
-          .update({
-        "balance": balance,
-      });
+          .update({"balance": balance, "total_out":out});
       Map<String, dynamic> transaction = {
-        "date":transactiondate,
-        "action":"Send",
+        "date": transactiondate,
+        "action": "Send",
         'from': userNo,
         "to": "Mpesa ${phoneNumbercontroller.text}",
-        "amount":int.parse(amountcontroller.text)
+        "amount": int.parse(amountcontroller.text)
       };
       await FirebaseFirestore.instance
           .collection("transactions_entity")
@@ -124,6 +125,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
       ),
     );
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

@@ -80,6 +80,7 @@ class _HomeDetailsState extends State<HomeDetails> {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             return Scaffold(
+              resizeToAvoidBottomInset:true,
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {

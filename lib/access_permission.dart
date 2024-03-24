@@ -65,6 +65,7 @@ class _AccessPermissionState extends State<AccessPermission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

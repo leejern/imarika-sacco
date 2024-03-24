@@ -56,6 +56,7 @@ class _BudgetPageState extends State<BudgetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:true,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Budget"),

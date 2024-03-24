@@ -129,6 +129,7 @@ class _LoansPageState extends State<LoansPage> {
         if (snapshot.hasData && snapshot.data != null) {
           bool hasLoan = snapshot.data?.get('amount to be paid') > 0;
           return Scaffold(
+            resizeToAvoidBottomInset:true,
             appBar: AppBar(
               title: const Text('Request Loan'),
             ),
